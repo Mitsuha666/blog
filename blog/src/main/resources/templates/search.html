@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="_fragments :: head(~{::title})">
+  <title>搜索</title>
+</head>
+
+<body>
+
+  <!--导航-->
+  <nav th:replace="_fragments :: menu(1)" ></nav>
+
+  <!--中间内容-->
+  <div  class="m-container-small m-padded-tb-big animated fadeIn">
+    <div class="ui container">
+      <!--header-->
+      <div class="ui top attached segment">
+        <div class="ui middle aligned two column grid">
+          <div class="column">
+            <h3 class="ui teal header">搜索结果</h3>
+          </div>
+          <div class="right aligned column">
+            共<h2 class="ui orange header m-inline-block m-text-thin" th:text="${pageInfo.total}">14</h2>个
+          </div>
+        </div>
+      </div>
+
+      <div class="ui top attached teal segment">
+        <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${pageInfo.list}">
+          <div class="ui middle aligned mobile reversed stackable grid">
+            <div class="eleven wide column">
+              <h3 class="ui header" ><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black" th:text="${blog.title}">你真的理解什么是财富自由吗?</a></h3>
+              <p class="m-text" th:text="|${blog.description}......|">正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来就没有想过，只是大家都那么做而已…...</p>
+              <div class="ui grid">
+                <div class="eleven wide column">
+                  <div class="ui mini horizontal link list">
+                    <div class="item">
+                      <img src="https://unsplash.it/100/100?image=1005" th:src="@{${blog.user.avatar}}" alt="" class="ui avatar image">
+                      <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}" >朱一鸣</a></div>
+                    </div>
+                    <div class="item">
+                      <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}">2020-3-02</span>
+                    </div>
+                    <div class="item">
+                      <i class="eye icon"></i> <span th:text="${blog.views}">2342</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="right aligned five wide column">
+                  <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin" th:text="${blog.type.name}">认知升级</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="five wide column">
+              <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+                <img src="https://unsplash.it/800/450?image=1005" th:src="@{${blog.firstPicture}}"  alt="" class="ui rounded image">
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!--footer-->
+      <div class="ui bottom attached segment" >
+        <div class="ui middle aligned two column grid">
+          <div class="column">
+            <div class="item"><a class="ui mini purple basic button" th:href="@{/(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a></div>
+          </div>
+          <div class="right aligned column">
+            <div class="item"><a class="ui mini purple basic button" th:href="@{/(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui segment m-inline-block">
+        <p >当前第<span th:text="${pageInfo.pageNum}"></span>页，总<span th:text="${pageInfo.pages}"></span>页，共<span th:text="${pageInfo.total}"></span>条记录</p>
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <!--底部footer-->
+  <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+
+  </footer>
+
+  <!--导入的script-->
+  <th:block th:replace="_fragments :: script">
+
+  </th:block>
+
+  <script>
+    $('.menu.toggle').click(function () {
+      $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+  </script>
+</body>
+</html>

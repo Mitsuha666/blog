@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="admin/_fragments :: head(~{::title})">
+  <title>标签新增</title>
+</head>
+
+<body>
+
+  <!--导航-->
+  <nav th:replace="admin/_fragments :: menu(3)" >
+
+  </nav>
+
+  <div class="ui attached pointing menu">
+    <div class="ui container">
+      <div class="right menu">
+        <a href="#" th:href="@{/admin/tags/input}" class="teal active item">发布</a>
+        <a href="#" th:href="@{/admin/tags}" class="item">列表</a>
+      </div>
+    </div>
+  </div>
+
+  <!--中间内容-->
+  <div  class="m-container m-padded-tb-big">
+    <div class="ui container">                         <!--如果没id，则进行新增，若有id，则进行更新-->
+      <form action="#" th:object="${tag}" th:action="*{id}==null ? @{/admin/tags} : @{/admin/tags/{id}(id=*{id})}" method="post" class="ui form">
+        <input type="hidden" name="id" th:value="*{id}">
+        <div class="required field">
+          <div class="ui left labeled input">
+            <label class="ui teal basic label">名称</label>
+            <input type="text" name="name"  placeholder="标签名称" th:value="*{name}">
+          </div>
+        </div>
+
+
+        <div class="ui error message"></div> <!--显示错误信息-->
+
+        <div class="ui negetive message" th:unless="${#strings.isEmpty(msg)}">
+          <i class="close icon"></i>
+          <div class="header">验证失败：</div>
+          <p th:text="${msg}">对不起，操作失败！</p>
+        </div>
+
+        <div class="ui right aligned container">
+          <button type="button" class="ui button" onclick="window.history.go(-1)" >返回</button>
+          <button type="button" id="save-btn" class="ui secondary submit button">提交</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <!--底部footer-->
+  <footer th:replace="admin/_fragments :: footer" >
+    
+  </footer>
+
+  <th:block th:replace="admin/_fragments :: script">
+
+  </th:block>
+
+
+  <script>
+
+    $('.menu.toggle').click(function () {
+      $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+      on : 'hover'
+    });
+
+    $('.ui.form').form({
+      fields : {
+        title : {
+          identifier: 'name',
+          rules: [{
+            type : 'empty',
+            prompt: '请输入标签名称'
+          }]
+        }
+      }
+    });
+
+
+  </script>
+</body>
+</html>

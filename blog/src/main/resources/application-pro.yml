@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: admin
+
+pagehelper:                #分页插件
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params:
+
+mybatis:
+  type-aliases-package: com.blog.pojo   #设置别名
+  mapper-locations: classpath:mapper/*.xml   #ָ指定myBatis的核心配置文件与Mapper映射文件
+
+logging:  #日志级别
+  level:
+    root: warn
+    com.blog: info
+  file: log/blog-pro.log
+
+
+

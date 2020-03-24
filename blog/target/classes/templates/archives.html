@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="_fragments :: head(~{::title})">
+  <title>归档</title>
+</head>
+
+<body class="archives-bg">
+
+<!--头部导航-->
+  <nav th:replace="_fragments :: menu(4)" ></nav>
+
+  <!--中间内容-->
+  <div  class="m-container-small m-padded-tb-big" style="height: 800px!important;">
+    <div class="ui container">
+      <!--header-->
+      <div class="ui top attached padded segment">
+        <div class="ui middle aligned two column grid">
+          <div class="column">
+            <h3 class="ui orange header">归档</h3>
+          </div>
+          <div class="right aligned column">
+            共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${blogCount}"> 114 </h2> 篇博客
+          </div>
+        </div>
+      </div>
+
+      <br><br><br>
+
+      <th:block th:each="item : ${archiveMap}">
+      <h2 class="ui center aligned header" th:text="${item.key}">2017</h2>
+      <div class="ui fluid vertical menu">
+        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${item.value}">
+          <span>
+            <i class="mini orange circle icon"></i><span th:text="${blog.title}">关于刻意练习的清单</span>
+            <div class="ui orange basic left pointing label m-padded-mini " th:text="${#dates.format(blog.updateTime,'MMMdd')}">9月03</div>
+          </span>
+          <div class="ui orange basic left pointing label m-padded-mini " th:text="${blog.flag}">原创</div>
+        </a>
+        <!--/*-->
+        <a href="#" target="_blank" class="item">
+          <span>
+            <i class="mini teal circle icon"></i>关于刻意练习的清单
+            <div class="ui teal basic left pointing label m-padded-mini ">9月03</div>
+          </span>
+          <div class="ui orange basic left pointing label m-padded-mini ">原创</div>
+        </a>
+        <a href="#" target="_blank" class="item">
+          <span>
+            <i class="mini teal circle icon"></i>关于刻意练习的清单
+            <div class="ui teal basic left pointing label m-padded-mini ">9月03</div>
+          </span>
+          <div class="ui orange basic left pointing label m-padded-mini ">原创</div>
+        </a>
+        <a href="#" target="_blank" class="item">
+          <span>
+            <i class="mini teal circle icon"></i>关于刻意练习的清单
+            <div class="ui teal basic left pointing label m-padded-mini ">9月03</div>
+          </span>
+          <div class="ui orange basic left pointing label m-padded-mini ">原创</div>
+        </a>
+        <!--*/-->
+      </div>
+      </th:block>
+
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+<!--底部footer-->
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+
+</footer>
+
+<!--导入的script-->
+<th:block th:replace="_fragments :: script">
+
+</th:block>
+
+  <script>
+    $('.menu.toggle').click(function () {
+      $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+  </script>
+</body>
+</html>
