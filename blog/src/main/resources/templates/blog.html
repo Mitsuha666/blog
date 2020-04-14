@@ -508,7 +508,7 @@ h5,h6{font-size:1em;}
             </div>
 
             <!--提交留言表单-->
-           <form id="blog-form" action="#" th:action="@{/comments}" method="post" class="ui form">
+           
             <div id="comment-form" class="ui form">
                 <input type="hidden" name="blog.id" th:value="${blog.id}">
                 <input type="hidden" name="parentComment.id" value="-1">
@@ -533,7 +533,7 @@ h5,h6{font-size:1em;}
                     </div>
                 </div>
             </div>
-            </form>
+            
         </div>
     </div>
 </div>
