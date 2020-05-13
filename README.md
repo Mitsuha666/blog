@@ -12,6 +12,8 @@
 
 功能：**前端展示 + 后台管理**，**添加了萌萌的看板娘**
 
+博客地址：**http://www.zhuyiming.top/**
+
 **技术组合：**
 
 *  后端：Spring Boot + mybatis 
