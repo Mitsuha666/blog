@@ -31,9 +31,9 @@ public class IndexController {
     private TagService tagService;
 
     @GetMapping("/")
-    public String toIndex(@RequestParam(required = false,defaultValue = "1",value = "pagenum")int pagenum, Model model){
+    public String toIndex(@RequestParam(required = false,defaultValue = "1",value = "pageNum")int pageNum, Model model){
 
-        PageHelper.startPage(pagenum, 8);
+        PageHelper.startPage(pageNum, 5);
         List<Blog> allBlog = blogService.getIndexBlog();
         List<Type> allType = typeService.getBlogType();  //获取博客的类型(联表查询)
         List<Tag> allTag = tagService.getBlogTag();  //获取博客的标签(联表查询)
@@ -49,10 +49,10 @@ public class IndexController {
     }
 
     @PostMapping("/search")
-    public String search(@RequestParam(required = false,defaultValue = "1",value = "pagenum")int pagenum,
+    public String search(@RequestParam(required = false,defaultValue = "1",value = "pageNum")int pageNum,
                          @RequestParam String query, Model model){
 
-        PageHelper.startPage(pagenum, 5);
+        PageHelper.startPage(pageNum, 5);
         List<Blog> searchBlog = blogService.getSearchBlog(query);
         PageInfo pageInfo = new PageInfo(searchBlog);
         model.addAttribute("pageInfo", pageInfo);
